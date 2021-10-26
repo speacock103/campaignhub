@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "503138917856",
+    "project_id": "campaignhub-b059d",
+    "storage_bucket": "campaignhub-b059d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503138917856:android:75df3e427c2a4fbf5f1f85",
+        "android_client_info": {
+          "package_name": "com.example.campaignhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503138917856-gnbes0f9n0op0cmdldf0mflbi8arhqfp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.campaignhub",
+            "certificate_hash": "ae822ad74d5c676dd538350ec52b8825234bddc3"
+          }
+        },
+        {
+          "client_id": "503138917856-g3u225grpogab48ulb3rlr8n79f8bm1q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhZxrXSq-uZUw3Sj4n3aOv7ZsH6pHliVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503138917856-g3u225grpogab48ulb3rlr8n79f8bm1q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
