@@ -39,11 +39,11 @@ class Authentication {
 
     //login success, push user forward
     if (user != null) {
-     // Navigator.of(context).pushReplacement(
-       // MaterialPageRoute(
-       //   builder: (context) => UserView(),
-       // ),
-     // );
+     Navigator.of(context).pushReplacement(
+       MaterialPageRoute(
+          builder: (context) => UserView(),
+        ),
+      );
     }
 
     return firebaseApp;
