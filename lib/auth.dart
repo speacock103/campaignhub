@@ -1,26 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:campaignhub/userpage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'global.dart' as global;
 
 class Authentication {
-
-  static Future<int> checkLog() async {
-    User? user = await FirebaseAuth.instance.currentUser;
-
-    //user exist and may auto log, fetch data and push to userpage
-    if(user != null){
-      //will also retrieve info from db on home load
-      return 0;
-    }
-    //user must login
-    else
-    {
-      return 1;
-    }
-  }
 
   static SnackBar customSnackBar({required String content}) {
     return SnackBar(
@@ -36,15 +21,6 @@ class Authentication {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
 
     User? user = FirebaseAuth.instance.currentUser;
-
-    //login success, push user forward
-    if (user != null) {
-     //Navigator.of(context).pushReplacement(
-       //MaterialPageRoute(
-          //builder: (context) => UserView(),
-       // ),
-      //);
-    }
 
     return firebaseApp;
   }
@@ -166,7 +142,14 @@ class Authentication {
     }
   }
 
-  //store uuid
+  //get uuid
+  static Future getUuid() async {
+    User? user = await FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      global.uuidtoken = user.uid;
+    }
+  }
 
   //verify email
 

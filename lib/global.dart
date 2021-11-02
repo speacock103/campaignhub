@@ -3,6 +3,6 @@ library campaignhub.global;
 String password = "";
 String email = "";
 String username = "";
-String authtoken = "";
+String uuidtoken = "";
 int login = 0;
 

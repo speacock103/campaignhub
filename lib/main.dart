@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:campaignhub/auth.dart';
-import 'package:campaignhub/googlebutton.dart';
-import 'package:flutter/gestures.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'global.dart' as global;
-import 'backfunc.dart' as backfunc;
 import 'userpage.dart';
 import 'loginpage.dart';
 import 'package:firebase_core/firebase_core.dart';

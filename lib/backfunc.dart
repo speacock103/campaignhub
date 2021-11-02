@@ -7,5 +7,7 @@ import 'package:http/http.dart' as http;
 class Backend {
   //push new user to database entry
 
+
   //retrieve user database entry info on app load
+
 }

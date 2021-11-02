@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:campaignhub/auth.dart';
-import 'main.dart';
 import 'userpage.dart';
 import 'global.dart' as global;
 import 'backfunc.dart' as backfunc;
