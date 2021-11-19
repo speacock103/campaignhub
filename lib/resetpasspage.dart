@@ -180,10 +180,7 @@ class _ResetPass extends State<ResetPass> {
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => Login()),
-                                  );
+                                  Navigator.pop(context);
                                 }),
                         ]
                     )

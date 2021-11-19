@@ -326,10 +326,7 @@ class _CreateUser extends State<CreateUser> {
                                 ),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => Login()),
-                                    );
+                                    Navigator.pop(context);
                                   }),
                           ]
                       )
