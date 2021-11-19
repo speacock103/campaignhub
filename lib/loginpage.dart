@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:campaignhub/auth.dart';
+import 'package:campaignhub/authent.dart';
 import 'userpage.dart';
-import 'auth.dart' as auth;
 import 'global.dart' as global;
 import 'backfunc.dart' as backfunc;
 import 'package:campaignhub/googlebutton.dart';
 import 'package:flutter/gestures.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'sizehelp.dart';
+import 'createuserpage.dart';
+import 'resetpasspage.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -17,14 +18,9 @@ class Login extends StatefulWidget {
 //login page. login with existing account, google, or create account
 class _Login extends State<Login> {
   int page = 0;
-  String username = "username";
   String password = "password";
   String verifypassword = "verify password";
-  String tempemail = "email";
-
-  void createAccount() {
-    int acc = register();
-  }
+  String email = "email";
 
   @override
   Widget build(BuildContext context) {
@@ -85,16 +81,12 @@ class _Login extends State<Login> {
                   ),
                 ),
 
-                if (page == 0 || page == 2) SizedBox(
-                  height: displayHeight(context) * .08,
-                ),
-
-                if (page == 1 || page == 4) SizedBox(
+                SizedBox(
                   height: displayHeight(context) * .08,
                 ),
 
                 //email field (login and create account)
-                if (page == 0 || page == 1 || page == 4)  Stack(
+                Stack(
                   children: <Widget>[
                     Align(
                       alignment: Alignment.centerLeft,
@@ -123,12 +115,12 @@ class _Login extends State<Login> {
                   ],
                 ),
 
-                if (page == 0 || page == 1 || page == 4) SizedBox(
+                SizedBox(
                   height: displayHeight(context) * .015,
                 ),
 
                 //enter username (login and create account)
-                if (page == 0 || page == 1 || page == 4) Padding(
+                Padding(
                   padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
                   //padding: EdgeInsets.symmetric(horizontal: 20),
 
@@ -143,22 +135,18 @@ class _Login extends State<Login> {
                       ),
                       onChanged: (value) {
                         setState(() {
-                          tempemail = value;
+                          email = value;
                         });
                       }
                   ),
                 ),
 
-                if (page == 0) SizedBox(
-                  height: displayHeight(context) * .05,
-                ),
-
-                if (page == 1 || page == 4) SizedBox(
+                SizedBox(
                   height: displayHeight(context) * .05,
                 ),
 
                 //password field (login and create)
-                if (page == 0 || page == 1 || page == 4) Stack(
+                Stack(
                   children: <Widget>[
                     Align(
                       alignment: Alignment.centerLeft,
@@ -188,7 +176,7 @@ class _Login extends State<Login> {
                 ),
 
                 //enter password (login and create)
-                if (page == 0 || page == 1 || page == 4) Padding(
+                Padding(
                   padding: const EdgeInsets.only(
                       left: 15.0, right: 15.0, top: 15, bottom: 0),
                   //padding: EdgeInsets.symmetric(horizontal: 15),
@@ -209,132 +197,12 @@ class _Login extends State<Login> {
                   ),
                 ),
 
-                if (page == 0) SizedBox(
+                SizedBox(
                   height: displayHeight(context) * .05,
                 ),
-
-                if (page == 1 || page == 4) SizedBox(
-                  height: displayHeight(context) * .05,
-                ),
-
-                //confirm password (create account)
-                if (page == 1 || page == 4) Stack(
-                  children: <Widget>[
-                    Align(
-                      alignment: Alignment.centerLeft,
-                    ),
-                    // Stroked text as border.
-                    Text(
-                      '   Confirm Password:',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: displayWidth(context) * 0.055,
-                        foreground: Paint()
-                          ..style = PaintingStyle.stroke
-                          ..strokeWidth = .8
-                          ..color = Colors.red,
-                      ),
-                    ),
-                    // Solid text as fill.
-                    Text(
-                      '   Confirm Password:',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: displayWidth(context) * 0.055,
-                        color: Colors.grey[850],
-                      ),
-                    ),
-                  ],
-                ),
-
-                //enter confirmed password (create account)
-                if (page == 1 || page == 4) Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15.0, right: 15.0, top: 15, bottom: 0),
-                  //padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.black)),
-                        border: const OutlineInputBorder(),
-                        labelStyle: new TextStyle(color: Colors.black),
-                        isDense: true,
-                        //labelText: 'Username',
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          verifypassword = value;
-                        });
-                      }
-                  ),
-                ),
-
-                if (page == 1 || page == 4) SizedBox(
-                  height: displayHeight(context) * .03,
-                ),
-
-                //email to verify text (change password)
-                if (page == 2)  Stack(
-                  children: <Widget>[
-                    Align(
-                      alignment: Alignment.centerLeft,
-                    ),
-                    // Stroked text as border.
-                    Text(
-                      '   Enter Account Email:',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: displayWidth(context) * 0.055,
-                        foreground: Paint()
-                          ..style = PaintingStyle.stroke
-                          ..strokeWidth = .8
-                          ..color = Colors.red,
-                      ),
-                    ),
-                    // Solid text as fill.
-                    Text(
-                      '   Enter Account Email:',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: displayWidth(context) * 0.055,
-                        color: Colors.grey[850],
-                      ),
-                    ),
-                  ],
-                ),
-
-                if (page == 2) SizedBox(
-                  height: displayHeight(context) * 0.02,
-                ),
-
-                //enter email to verify (change password)
-                if (page == 2) Padding(
-                  //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-
-                  child: TextField(
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.black)),
-                        border: const OutlineInputBorder(),
-                        labelStyle: new TextStyle(color: Colors.black),
-                        isDense: true,
-                        //labelText: 'Username',
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          tempemail = value;
-                        });
-                      }
-                  ),
-                ),
-
-                //new password (change pass page 2)
-
-                //enter new password (change pass page 2)
 
                 // login button (login)
-                if (page == 0) Container (
+                Container (
                   height: displayHeight(context) * .08,
                   width: displayWidth(context) * .45,
                   decoration: BoxDecoration(
@@ -343,7 +211,30 @@ class _Login extends State<Login> {
                   ),
                   child: TextButton(
                     onPressed: () {
+                      Authentication.signIn(email, password).then((data){
 
+                        //success, push to user page
+                        if (data == 0) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => UserView()),
+                          );
+                        }
+
+                        //user not exist
+                        if (data == 1) {
+                          setState(() {
+                            page = 1;
+                          });
+                        }
+
+                        //wrong password
+                        if (data == 2) {
+                          setState(() {
+                            page = 2;
+                          });
+                        }
+                      });
                     },
                     child: Text(
                       'Login',
@@ -354,12 +245,12 @@ class _Login extends State<Login> {
                   ),
                 ),
 
-                if (page == 0) SizedBox(
+                SizedBox(
                   height: displayHeight(context) * .015,
                 ),
 
                 //or sign in with google
-                if (page == 0) Stack(
+                Stack(
                   children: <Widget>[
                     // Stroked text as border.
                     Text(
@@ -385,12 +276,12 @@ class _Login extends State<Login> {
                   ],
                 ),
 
-                if (page == 0) SizedBox(
+                SizedBox(
                   height: displayHeight(context) * .015,
                 ),
 
                 //google button
-                if (page == 0) FutureBuilder(
+                FutureBuilder(
                   future: Authentication.initializeFirebase(context: context),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
@@ -406,71 +297,12 @@ class _Login extends State<Login> {
                   },
                 ),
 
-                if (page == 0) SizedBox(
+                SizedBox(
                   height: displayHeight(context) * 0.09,
                 ),
-
-                //create account button (create account)
-                if (page == 1 || page == 4) Container (
-                  height: displayHeight(context) * .08,
-                  width: displayWidth(context) * .55,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[850],
-                      borderRadius: BorderRadius.circular(35)
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      if (password == verifypassword) {
-                        int acc = auth.register(tempemail, password, context);
-                      }
-                      else {
-                        setState(() {
-                          page = 4;
-                        });
-                      }
-                    },
-                    child: Text(
-                      'Create Account',
-                      style: TextStyle(
-                          color: Colors.red, fontSize: displayWidth(context) * 0.055
-                      ),
-                    ),
-                  ),
-                ),
-
-                if (page == 1 || page == 4) SizedBox(
-                  height: displayHeight(context) * 0.09,
-                ),
-
-                if (page == 2) SizedBox(
-                  height: displayHeight(context) * 0.3,
-                ),
-
-                //verify email button (change password)
-                if (page == 2) Container (
-                  height: displayHeight(context) * .08,
-                  width: displayWidth(context) * .6,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[850],
-                      borderRadius: BorderRadius.circular(35)
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-
-                    },
-                    child: Text(
-                      'Send Verification',
-                      style: TextStyle(
-                          color: Colors.red, fontSize: displayWidth(context) * 0.055
-                      ),
-                    ),
-                  ),
-                ),
-
-                //update password button (change password page 2)
 
                 //forgot pass, make account
-                if (page == 0) RichText(
+                RichText(
                     text: TextSpan(
                         children: <TextSpan>[
                           TextSpan(
@@ -481,9 +313,10 @@ class _Login extends State<Login> {
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  setState(() {
-                                    page = 2;
-                                  });
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => ResetPass()),
+                                  );
                                 }),
                           TextSpan(
                               text: ' | ',
@@ -500,45 +333,29 @@ class _Login extends State<Login> {
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  setState(() {
-                                    page = 1;
-                                  });
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => CreateUser()),
+                                  );
                                 }),
                         ]
                     )
                 ),
 
-                if (page == 2) SizedBox(
-                  height:displayHeight(context) * 0.09,
-                ),
-
-                //return to sign in (create account and change password)
-                if (page == 1 || page == 2 || page == 4) RichText(
-                    text: TextSpan(
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: 'Return to Sign In',
-                              style: TextStyle(
-                                color: Colors.red,
-                                fontSize: displayWidth(context) * 0.045,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  setState(() {
-                                    page = 0;
-                                  });
-                                }),
-                        ]
-                    )
-                ),
-
-                if (page == 4) SizedBox(
-                  height:displayHeight(context) * 0.08,
-                ),
-
-                if (page == 4) RichText(
+                //error messages
+                if (page == 1) RichText(
                   text: TextSpan(
-                      text: 'error: passwords do not match',
+                      text: 'error: user with email does not exist',
+                      style: TextStyle(
+                        color: Colors.red[800],
+                        fontSize: displayWidth(context) * 0.04,
+                      )
+                  ),
+                ),
+
+                if (page == 2) RichText(
+                  text: TextSpan(
+                      text: 'error: password failed',
                       style: TextStyle(
                         color: Colors.red[800],
                         fontSize: displayWidth(context) * 0.04,
@@ -548,7 +365,9 @@ class _Login extends State<Login> {
 
               ],
             ),
+
           ),
+
         ),
       ),
 

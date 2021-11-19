@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:campaignhub/auth.dart';
+import 'package:campaignhub/authent.dart';
 import 'package:campaignhub/userpage.dart';
 import 'sizehelp.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:campaignhub/auth.dart';
+import 'package:campaignhub/authent.dart';
 import 'main.dart';
 import 'loginpage.dart';
 import 'global.dart' as global;

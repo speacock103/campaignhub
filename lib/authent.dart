@@ -91,13 +91,12 @@ class Authentication {
   }
 
   //email register
-  static Future<int> register(String email, String password, {required BuildContext context}) async {
+  static Future<int> registerEmail(String email, String password, {required BuildContext context}) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: "$email",
           password: "$password"
       );
-      return 0;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -114,7 +113,7 @@ class Authentication {
   }
 
   //email/pass sign in
-  static Future signIn(String email, String password) async {
+  static Future<int> signIn(String email, String password) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: "$email",
@@ -123,10 +122,14 @@ class Authentication {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
+        return 1;
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
+        return 2;
       }
     }
+
+    return 0;
   }
 
   //account sign out
