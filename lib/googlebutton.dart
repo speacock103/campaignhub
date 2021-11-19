@@ -22,7 +22,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
       )
           : OutlinedButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.black),
+          backgroundColor: MaterialStateProperty.all(Colors.grey[850]),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(40),
@@ -41,6 +41,9 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
           });
 
           if (user != null) {
+
+            //check if user exists on db end, if not make username
+
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => UserView(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:campaignhub/auth.dart';
 import 'userpage.dart';
+import 'auth.dart' as auth;
 import 'global.dart' as global;
 import 'backfunc.dart' as backfunc;
 import 'package:campaignhub/googlebutton.dart';
@@ -20,6 +21,10 @@ class _Login extends State<Login> {
   String password = "password";
   String verifypassword = "verify password";
   String tempemail = "email";
+
+  void createAccount() {
+    int acc = register();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,12 +89,12 @@ class _Login extends State<Login> {
                   height: displayHeight(context) * .08,
                 ),
 
-                if (page == 1) SizedBox(
-                  height: displayHeight(context) * .03,
+                if (page == 1 || page == 4) SizedBox(
+                  height: displayHeight(context) * .08,
                 ),
 
-                //email addy (create account)
-                if (page == 1)  Stack(
+                //email field (login and create account)
+                if (page == 0 || page == 1 || page == 4)  Stack(
                   children: <Widget>[
                     Align(
                       alignment: Alignment.centerLeft,
@@ -118,72 +123,12 @@ class _Login extends State<Login> {
                   ],
                 ),
 
-                if (page == 1) SizedBox(
-                  height: displayHeight(context) * .015,
-                ),
-
-                //enter email (create account)
-                if (page == 1) Padding(
-                  //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-
-                  child: TextField(
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        enabledBorder: const OutlineInputBorder(borderSide: const BorderSide(color: Colors.black)),
-                        border: const OutlineInputBorder(),
-                        labelStyle: new TextStyle(color: Colors.black),
-                        isDense: true,
-                        //labelText: 'Username',
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          tempemail = value;
-                        });
-                      }
-                  ),
-                ),
-
-                if (page == 1) SizedBox(
-                  height: displayHeight(context) * .02,
-                ),
-
-                //username field (login and create account)
-                if (page == 0 || page == 1)  Stack(
-                  children: <Widget>[
-                    Align(
-                      alignment: Alignment.centerLeft,
-                    ),
-                    // Stroked text as border.
-                    Text(
-                      '   Username:',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: displayWidth(context) * 0.055,
-                        foreground: Paint()
-                          ..style = PaintingStyle.stroke
-                          ..strokeWidth = .8
-                          ..color = Colors.red,
-                      ),
-                    ),
-                    // Solid text as fill.
-                    Text(
-                      '   Username:',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: displayWidth(context) * 0.055,
-                        color: Colors.grey[850],
-                      ),
-                    ),
-                  ],
-                ),
-
-                if (page == 0 || page == 1) SizedBox(
+                if (page == 0 || page == 1 || page == 4) SizedBox(
                   height: displayHeight(context) * .015,
                 ),
 
                 //enter username (login and create account)
-                if (page == 0 || page == 1) Padding(
+                if (page == 0 || page == 1 || page == 4) Padding(
                   padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
                   //padding: EdgeInsets.symmetric(horizontal: 20),
 
@@ -198,7 +143,7 @@ class _Login extends State<Login> {
                       ),
                       onChanged: (value) {
                         setState(() {
-                          username = value;
+                          tempemail = value;
                         });
                       }
                   ),
@@ -208,12 +153,12 @@ class _Login extends State<Login> {
                   height: displayHeight(context) * .05,
                 ),
 
-                if (page == 1) SizedBox(
-                  height: displayHeight(context) * .02,
+                if (page == 1 || page == 4) SizedBox(
+                  height: displayHeight(context) * .05,
                 ),
 
                 //password field (login and create)
-                if (page == 0 || page == 1) Stack(
+                if (page == 0 || page == 1 || page == 4) Stack(
                   children: <Widget>[
                     Align(
                       alignment: Alignment.centerLeft,
@@ -243,7 +188,7 @@ class _Login extends State<Login> {
                 ),
 
                 //enter password (login and create)
-                if (page == 0 || page == 1) Padding(
+                if (page == 0 || page == 1 || page == 4) Padding(
                   padding: const EdgeInsets.only(
                       left: 15.0, right: 15.0, top: 15, bottom: 0),
                   //padding: EdgeInsets.symmetric(horizontal: 15),
@@ -268,12 +213,12 @@ class _Login extends State<Login> {
                   height: displayHeight(context) * .05,
                 ),
 
-                if (page == 1) SizedBox(
-                  height: displayHeight(context) * .02,
+                if (page == 1 || page == 4) SizedBox(
+                  height: displayHeight(context) * .05,
                 ),
 
                 //confirm password (create account)
-                if (page == 1) Stack(
+                if (page == 1 || page == 4) Stack(
                   children: <Widget>[
                     Align(
                       alignment: Alignment.centerLeft,
@@ -303,7 +248,7 @@ class _Login extends State<Login> {
                 ),
 
                 //enter confirmed password (create account)
-                if (page == 1) Padding(
+                if (page == 1 || page == 4) Padding(
                   padding: const EdgeInsets.only(
                       left: 15.0, right: 15.0, top: 15, bottom: 0),
                   //padding: EdgeInsets.symmetric(horizontal: 15),
@@ -324,20 +269,20 @@ class _Login extends State<Login> {
                   ),
                 ),
 
-                if (page == 1) SizedBox(
-                  height: displayHeight(context) * .02,
+                if (page == 1 || page == 4) SizedBox(
+                  height: displayHeight(context) * .03,
                 ),
 
                 //email to verify text (change password)
                 if (page == 2)  Stack(
                   children: <Widget>[
                     Align(
-                      alignment: Alignment.center,
+                      alignment: Alignment.centerLeft,
                     ),
                     // Stroked text as border.
                     Text(
-                      '   Enter Email for Account                         Verification:',
-                      textAlign: TextAlign.center,
+                      '   Enter Account Email:',
+                      textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: displayWidth(context) * 0.055,
                         foreground: Paint()
@@ -348,8 +293,8 @@ class _Login extends State<Login> {
                     ),
                     // Solid text as fill.
                     Text(
-                      '   Enter Email for Account                         Verification:',
-                      textAlign: TextAlign.center,
+                      '   Enter Account Email:',
+                      textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: displayWidth(context) * 0.055,
                         color: Colors.grey[850],
@@ -393,7 +338,7 @@ class _Login extends State<Login> {
                   height: displayHeight(context) * .08,
                   width: displayWidth(context) * .45,
                   decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: Colors.grey[850],
                       borderRadius: BorderRadius.circular(35)
                   ),
                   child: TextButton(
@@ -466,16 +411,23 @@ class _Login extends State<Login> {
                 ),
 
                 //create account button (create account)
-                if (page == 1) Container (
+                if (page == 1 || page == 4) Container (
                   height: displayHeight(context) * .08,
                   width: displayWidth(context) * .55,
                   decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: Colors.grey[850],
                       borderRadius: BorderRadius.circular(35)
                   ),
                   child: TextButton(
                     onPressed: () {
-
+                      if (password == verifypassword) {
+                        int acc = auth.register(tempemail, password, context);
+                      }
+                      else {
+                        setState(() {
+                          page = 4;
+                        });
+                      }
                     },
                     child: Text(
                       'Create Account',
@@ -486,12 +438,12 @@ class _Login extends State<Login> {
                   ),
                 ),
 
-                if (page == 1) SizedBox(
-                  height: displayHeight(context) * 0.04,
+                if (page == 1 || page == 4) SizedBox(
+                  height: displayHeight(context) * 0.09,
                 ),
 
                 if (page == 2) SizedBox(
-                  height: displayHeight(context) * 0.05,
+                  height: displayHeight(context) * 0.3,
                 ),
 
                 //verify email button (change password)
@@ -499,7 +451,7 @@ class _Login extends State<Login> {
                   height: displayHeight(context) * .08,
                   width: displayWidth(context) * .6,
                   decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: Colors.grey[850],
                       borderRadius: BorderRadius.circular(35)
                   ),
                   child: TextButton(
@@ -557,11 +509,11 @@ class _Login extends State<Login> {
                 ),
 
                 if (page == 2) SizedBox(
-                  height:displayHeight(context) * 0.41,
+                  height:displayHeight(context) * 0.09,
                 ),
 
                 //return to sign in (create account and change password)
-                if (page == 1 || page == 2) RichText(
+                if (page == 1 || page == 2 || page == 4) RichText(
                     text: TextSpan(
                         children: <TextSpan>[
                           TextSpan(
@@ -578,6 +530,20 @@ class _Login extends State<Login> {
                                 }),
                         ]
                     )
+                ),
+
+                if (page == 4) SizedBox(
+                  height:displayHeight(context) * 0.08,
+                ),
+
+                if (page == 4) RichText(
+                  text: TextSpan(
+                      text: 'error: passwords do not match',
+                      style: TextStyle(
+                        color: Colors.red[800],
+                        fontSize: displayWidth(context) * 0.04,
+                      )
+                  ),
                 ),
 
               ],

@@ -91,21 +91,26 @@ class Authentication {
   }
 
   //email register
-  static Future register(String email, String password, {required BuildContext context}) async {
+  static Future<int> register(String email, String password, {required BuildContext context}) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: "$email",
           password: "$password"
       );
+      return 0;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
+        return 1;
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
+        return 2;
       }
     } catch (e) {
       print(e);
     }
+
+    return 0;
   }
 
   //email/pass sign in
