@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:campaignhub/authent.dart';
-import 'userpage.dart';
-import 'loginpage.dart';
-import 'createuserpage.dart';
-import 'global.dart' as global;
-import 'backfunc.dart' as backfunc;
+import 'backfunc.dart';
 import 'package:flutter/gestures.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'sizehelp.dart';
+import 'package:email_auth/email_auth.dart';
 
 class ResetPass extends StatefulWidget {
   @override
@@ -19,6 +15,7 @@ class _ResetPass extends State<ResetPass> {
   String email = "email";
   String password = "password";
   String verifypassword = "verify password";
+  EmailAuth emailAuth = new EmailAuth(sessionName: "verify",);
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +110,8 @@ class _ResetPass extends State<ResetPass> {
                   ],
                 ),
 
+                //code text field
+
                 SizedBox(
                   height: displayHeight(context) * 0.02,
                 ),
@@ -139,6 +138,8 @@ class _ResetPass extends State<ResetPass> {
                   ),
                 ),
 
+                //enter code field
+
                 SizedBox(
                   height: displayHeight(context) * 0.3,
                 ),
@@ -153,7 +154,19 @@ class _ResetPass extends State<ResetPass> {
                   ),
                   child: TextButton(
                     onPressed: () {
+                      Backend.sendOTP(email, emailAuth).then((data){
 
+                        //send success
+                        if (data == 0) {
+
+                        }
+
+                        //not success
+                        if (data == 1) {
+
+                        }
+
+                      });
                     },
                     child: Text(
                       'Send Verification',

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:campaignhub/authent.dart';
-import 'main.dart';
 import 'loginpage.dart';
-import 'global.dart' as global;
-import 'backfunc.dart' as backfunc;
+import 'backfunc.dart';
 import 'package:flutter/gestures.dart';
 import 'sizehelp.dart';
 

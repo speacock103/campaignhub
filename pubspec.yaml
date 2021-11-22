@@ -33,6 +33,7 @@ dependencies:
   google_sign_in: ^5.2.1
   provider: ^4.3.2+2
   http: ^0.13.3
+  email_auth: ^1.0.0
 
 dev_dependencies:
   flutter_test:

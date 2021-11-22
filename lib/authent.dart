@@ -159,8 +159,7 @@ class Authentication {
     }
   }
 
-  //verify email
-
   //reset password
+
 
 }
